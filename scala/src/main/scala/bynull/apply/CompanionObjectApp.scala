@@ -15,11 +15,16 @@ object CompanionObjectApp extends App {
   * 2.
   */
 object CompanionObject {
+  private val privateStaticVariable = 0
+  val singletonValue = 0
+
   def apply(name: String): CompanionObject = new CompanionObject(name)
 
   def apply(): CompanionObject = new CompanionObject("Mr. Doe")
 }
 
 class CompanionObject(name: String) {
-  def hello = println("Hello " + name)
+  val singletonValue = 15
+
+  def hello = println("Hello " + name + ", and private static variable is: " + CompanionObject.privateStaticVariable)
 }
