@@ -23,6 +23,6 @@ case class MyInvariantBounder[+A](value: A) {
   def print() = println(value)
 }
 
-case class MyContravariantBounder[-A](value: A) {
+/*case class MyContravariantBounder[-A](value: A) {
   def print() = println(value)
-}
+}*/
