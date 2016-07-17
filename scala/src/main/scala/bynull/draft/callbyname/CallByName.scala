@@ -1,4 +1,4 @@
-package bynull.callbyname
+package bynull.draft.callbyname
 
 /**
   * Created by bynull on 07.04.16.

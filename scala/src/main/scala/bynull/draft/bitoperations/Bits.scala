@@ -1,4 +1,4 @@
-package bynull.bitoperations
+package bynull.draft.bitoperations
 
 /**
   * https://habrahabr.ru/post/187606/

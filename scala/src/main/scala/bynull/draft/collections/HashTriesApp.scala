@@ -1,4 +1,4 @@
-package bynull.collections
+package bynull.draft.collections
 
 /**
   * Как работают? http://docs.scala-lang.org/overviews/collections/concrete-immutable-collection-classes

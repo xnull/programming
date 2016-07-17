@@ -1,4 +1,4 @@
-package bynull.viewbounds
+package bynull.draft.viewbounds
 
 /**
   * https://twitter.github.io/scala_school/advanced-types.html

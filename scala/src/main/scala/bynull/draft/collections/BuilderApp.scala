@@ -1,4 +1,4 @@
-package bynull.collections
+package bynull.draft.collections
 
 /**
   * Created by bynull on 12.04.16.
