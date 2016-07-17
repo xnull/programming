@@ -24,10 +24,19 @@ object Solution {
     //val data = lines.take(nodes).toList
 
     var tree = Node(1)
-    funcFill(tree, readValues())
+    tree = funcFill(tree, readValues())
+    println(tree)
 
     def funcFill(parent: Node[Int], lr: (Int, Int)): Node[Int] = {
       lr match {
+        case (-1, -1) =>
+          parent
+        case (l: Int, -1) =>
+          println("Only left: " + l)
+          Node(l)
+        case (-1, r: Int) =>
+          println("Only right: " + r)
+          Node(r)
         case (l: Int, r: Int) =>
           println("Complete: " + l)
           //прочитать 2 строки, и заполнить левую и правую ноду
@@ -37,16 +46,6 @@ object Solution {
           val rightSubtree = readValues()
           funcFill(left, leftSubtree)
           funcFill(right, rightSubtree)
-
-        case (l: Int, -1) =>
-          println("Only left: " + l)
-          Node(l)
-        case (-1, r: Int) =>
-          println("Only right: " + r)
-          Node(r)
-        case (-1, -1) =>
-          println("Empty: ")
-          Node(-1)
       }
     }
 
