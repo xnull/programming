@@ -24,28 +24,27 @@ object Solution {
     //val data = lines.take(nodes).toList
 
     var tree = Node(1)
-    tree = funcFill(tree, readValues())
+    tree = funcFill(tree, readValues() /*v(2,3)*/)
     println(tree)
 
     def funcFill(parent: Node[Int], lr: (Int, Int)): Node[Int] = {
       lr match {
-        case (-1, -1) =>
+        case (l, r) if l == -1 && r == -1 =>
           parent
-        case (l: Int, -1) =>
+        case (l, r) if r == -1 =>
           println("Only left: " + l)
-          Node(l)
-        case (-1, r: Int) =>
+          val left = parent.left(l)
+          funcFill(left, readValues())
+        case (l, r) if l == -1 =>
           println("Only right: " + r)
-          Node(r)
-        case (l: Int, r: Int) =>
-          println("Complete: " + l)
-          //прочитать 2 строки, и заполнить левую и правую ноду
-          var left =  parent.left(l)
-          val right = left.right(r)
-          val leftSubtree = readValues()
-          val rightSubtree = readValues()
-          funcFill(left, leftSubtree)
-          funcFill(right, rightSubtree)
+          val right = parent.right(r)
+          funcFill(right, readValues())
+        case (l: Int, r: Int) => //s1
+          println("Two nodes: " + l + ", " + r)
+          val p = parent.leftRight(l, r)
+          val leftSubtree = readValues() //v(4, -1)
+        val rightSubtree = readValues() //v(5, -1)
+          p.leftRightNode(p.l.map(ll => funcFill(ll, leftSubtree)), p.r.map(rr => funcFill(rr, rightSubtree)))
       }
     }
 
@@ -64,7 +63,23 @@ object Solution {
 
     def leftRight(l: A, r: A): Node[A] = Node(value, newNode(l), newNode(r))
 
+    def leftRightNode(lNode: Option[Node[A]], rNode: Option[Node[A]]): Node[A] = Node(value, lNode, rNode)
+
     private def newNode(v: A): Option[Node[A]] = if (v == -1) None else Some(Node(v))
+
+    override def toString: String = {
+      s"*\n${toStr(0)}"
+    }
+
+    private def toStr(offset: Int): String = {
+      val offsetStr = if (offset == 0) "" else (1 to offset).map(x => " ").mkString
+
+      val vStr = s"|$offsetStr${if (offset == 0) "" else "|"}-$value"
+      val lStr = s"${l.map(n => n.toStr(offset + 2)).getOrElse("")}"
+      val rStr = s"${r.map(n => n.toStr(offset + 2)).getOrElse("")}"
+
+      s"$vStr\n$lStr\n$rStr"
+    }
   }
 
 }
